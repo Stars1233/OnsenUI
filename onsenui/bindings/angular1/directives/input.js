@@ -27,11 +27,11 @@
             }
           });
 
-          element.on('input', onInput)
+          element.on('input', onInput);
         }
 
         scope.$on('$destroy', () => {
-          element.off('input', onInput)
+          element.off('input', onInput);
           scope = element = attrs = el = null;
         });
       }
