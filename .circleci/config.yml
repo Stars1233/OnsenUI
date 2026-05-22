@@ -127,7 +127,11 @@ jobs:
             node scripts/unit-test.js --browsers=local_chrome_headless
       - run:
           name: Run AngularJS tests
-          command: cd onsenui/bindings/angular1; npm test
+          command: |
+            CHROME_MAJOR=$(node -e "const {execSync}=require('child_process');console.log(execSync(require('puppeteer').executablePath()+' --version').toString().match(/\d+/)[0])")
+            cd onsenui/bindings/angular1
+            npm install chromedriver@${CHROME_MAJOR} --no-save
+            npm test
 
       #- run: cd bindings/angular2; npm test
       #- run: cd bindings/vue; npm test
