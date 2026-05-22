@@ -3,15 +3,16 @@ jobs:
   build:
     working_directory: ~/working_directory
     docker:
-      - image: circleci/node:14.18.2-browsers
-        env:
-          - DISPLAY=:99
-          - CHROME_BIN=/usr/bin/google-chrome
+      - image: cimg/node:24.1.0-browsers
+        environment:
+          DISPLAY: :99
+          CHROME_BIN: /usr/bin/google-chrome-stable
+          NODE_OPTIONS: --openssl-legacy-provider
     steps:
       - checkout
-      - run:
-          name: Install npm
-          command: sudo npm install -g npm@latest
+      # - run:
+      #     name: Install npm
+      #     command: sudo npm install -g npm@latest
       - run:
           name: Print system information
           command: |
@@ -20,11 +21,14 @@ jobs:
             echo "$(google-chrome --version)"
       - run:
           name: Install coveralls and gulp globally
-          command: sudo npm install -g  add coveralls gulp
+          command: |
+            sudo apt-get update
+            sudo npm install -g coveralls gulp
       - run:
           name: Install rsync
-          command: sudo apt install -y rsync
-
+          command: |
+            sudo apt-get update
+            sudo apt install -y rsync
       # Core dependencies
       - restore_cache:
           keys:
