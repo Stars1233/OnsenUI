@@ -1,6 +1,13 @@
 // Karma configuration
 // Generated on Thu Apr 09 2015 15:16:41 GMT+0900 (JST)
 
+try {
+  process.env.CHROME_BIN = require('puppeteer').executablePath();
+  console.log('Using Puppeteer Chrome:', process.env.CHROME_BIN);
+} catch (e) {
+  console.warn('Puppeteer not installed');
+}
+
 module.exports = function(config) {
   config.set({
 

@@ -118,9 +118,13 @@ jobs:
 
       # Tests
       - run:
+          name: Install Puppeteer
+          command: npm install puppeteer
+      - run:
           name: Run OnsenUI Tests
-          command: npm run --prefix onsenui test
-
+          command: |
+            cd onsenui
+            node scripts/unit-test.js --browsers=local_chrome_headless
       - run:
           name: Run AngularJS tests
           command: cd onsenui/bindings/angular1; npm test
