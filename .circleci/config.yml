@@ -142,8 +142,8 @@ jobs:
           name: Save test results
           command: |
             mkdir -p ~/junit
-            find . -type f -regex "./onsenui/.*xml" -exec cp {} ~/junit/ \;
-            cat ./core/test/unit/coverage/*/lcov.info | coveralls || true # Ignore if this fails.
+            find . -type f -name "TEST-*.xml" -exec cp {} ~/junit/ \;
+            cat ./core/test/unit/coverage/*/lcov.info | coveralls || true
       - store_test_results:
           path: ~/junit
       - store_artifacts:
