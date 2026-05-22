@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import {
   Component,
   ModalFactory,
@@ -22,7 +23,7 @@ class MyModalComponent {
   message = '';
 
   constructor(params: Params) {
-    this.message = <string>params.at('message');
+    this.message = params.at('message') as string;
   }
 }
 
@@ -44,7 +45,7 @@ class MyModalComponent {
 })
 export class ModalComponent implements OnInit, OnDestroy {
   private _modal: any;
-  private _destroyModal: Function;
+  private _destroyModal: () => void;
 
   constructor(private _modalFactory: ModalFactory) {
   }

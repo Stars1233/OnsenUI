@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import {
   Component,
   OnsenModule,
@@ -32,7 +33,7 @@ import {
 })
 export class PullHookComponent implements AfterViewInit {
 
-  message: string = 'Pull down to refresh';
+  message = 'Pull down to refresh';
 
   items: number[] = [1, 2, 3, 4, 5];
 

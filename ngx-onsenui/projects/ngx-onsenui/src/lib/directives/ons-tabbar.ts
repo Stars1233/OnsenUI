@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   ComponentRef,
@@ -50,7 +51,7 @@ import * as ons from 'onsenui';
  *   })
  *   export class AppComponent {
  *     page = PageComponent
- * 
+ *
  *     onSwipe(event) {
  *       console.log(event);
  *     }
@@ -64,13 +65,11 @@ export class OnsTabbar {
 
   /**
    * @output swipe
-   * @param $event
-   * @param $event.index
-   * @param $event.options
    * @desc
    *   [en]Triggers when the tabbar is swiped.[/en]
    *   [ja]`<ons-tabbar>`がスワイプされた時に発火します。[/ja]
    */
+  // tslint:disable-next-line:no-output-rename
   @Output('swipe') _swipe = new EventEmitter();
 
   constructor(private _elementRef: ElementRef) {
@@ -132,7 +131,8 @@ export class OnsTab implements OnDestroy {
     this._elementRef.nativeElement.page = pageComponentType;
   }
 
-  constructor(private _elementRef: ElementRef,
+  constructor(
+    private _elementRef: ElementRef,
     private _viewContainer: ViewContainerRef,
     private _resolver: ComponentFactoryResolver,
     private _zone: NgZone) {
@@ -141,9 +141,9 @@ export class OnsTab implements OnDestroy {
   }
 
   _createPageLoader() {
-    const PageLoader = <any>ons.PageLoader;
+    const PageLoader = ons.PageLoader as any;
     return new PageLoader(
-      ({page, parent}: any, done: Function) => {
+      ({page, parent}: any, done: (...args: any[]) => void) => {
         this._zone.run(() => {
           const factory = this._resolver.resolveComponentFactory(page);
           const pageComponentRef = this._viewContainer.createComponent(factory, 0);
@@ -177,4 +177,3 @@ export class OnsTab implements OnDestroy {
     }
   }
 }
-

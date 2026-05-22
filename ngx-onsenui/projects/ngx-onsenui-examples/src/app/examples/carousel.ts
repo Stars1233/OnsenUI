@@ -39,6 +39,7 @@ import {
   `
 })
 export class CarouselComponent {
+  // tslint:disable-next-line:variable-name
   @ViewChild('myCarousel') _carousel: any;
   constructor() { }
 

@@ -34,8 +34,8 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   </ons-page>
   `
 })
-export class SearchInputComponent{
-  target: string = '';
+export class SearchInputComponent {
+  target = '';
   searchControl: FormControl;
 
   constructor() {

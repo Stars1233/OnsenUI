@@ -33,7 +33,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
     `
 })
 export class SwitchComponent {
-  target: boolean = true;
+  target = true;
   switchControl: FormControl;
 
   constructor() {

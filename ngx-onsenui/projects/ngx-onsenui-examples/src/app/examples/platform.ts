@@ -41,7 +41,7 @@ import {
 })
 export class PlatformComponent {
   public platform = onsPlatform;
-  constructor() { 
+  constructor() {
   }
 }
 

@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Directive,
   ElementRef,
@@ -23,7 +24,7 @@ import {
  *         <div class="center">Pull Hook</div>
  *       </ons-toolbar>
  *       <div class="content">
- *         <ons-pull-hook height="64px" threshold-height="128px" 
+ *         <ons-pull-hook height="64px" threshold-height="128px"
  *           (pull)="onPull($event)" (changestate)="onChangeState($event)" (action)="onAction($event)">
  *           {{message}}
  *         </ons-pull-hook>
@@ -53,11 +54,11 @@ import {
  *           break;
  *       }
  *     }
- * 
+ *
  *     onPull($event) {
  *       console.log($event.ratio);
  *     }
- * 
+ *
  *   }
  */
 @Directive({
@@ -68,8 +69,6 @@ export class OnsPullHook implements OnDestroy {
 
   /**
    * @output action
-   * @param $event
-   * @param $event.done
    * @desc
    *   [en]Triggers when the page is pulled down.[/en]
    *   [ja]`ons-pull-hook`要素のアクションが必要なときに呼び出されます。[/ja]
@@ -77,20 +76,7 @@ export class OnsPullHook implements OnDestroy {
   @Output() action = new EventEmitter();
 
   /**
-   * @output changestate
-   * @param $event
-   * @param $event.state
-   * @desc
-   *   [en]Triggers when the state is changed.[/en]
-   *   [ja]`ons-pull-hook`要素の状態が変わった時に呼び出されます。[/ja]
-   */
-
-
-  /**
    * @output pull
-   * @param $event
-   * @param $event.ratio
-   * @param $event.options
    * @desc
    *   [en]Triggers whenever the element is pulled.[/en]
    *   [ja]`ons-pull-hook`要素がプルされているときに呼び出されます。[/ja]
@@ -99,7 +85,7 @@ export class OnsPullHook implements OnDestroy {
 
   constructor(private _elementRef: ElementRef) {
     this._element = _elementRef.nativeElement;
-    this._element.onAction = (done: Function) => this.action.emit({done});
+    this._element.onAction = (done: (...args: any[]) => void) => this.action.emit({done});
     this._element.onPull = (ratio: number, options: any) => this.pull.emit({ratio, options});
   }
 

@@ -25,13 +25,13 @@ export class ComponentLoader {
         }
       });
     } else {
-      if ((<any>this.appRef).registerChangeDetector) {
-        (<any>this.appRef).registerChangeDetector(componentRef.changeDetectorRef);
+      if ((this.appRef as any).registerChangeDetector) {
+        (this.appRef as any).registerChangeDetector(componentRef.changeDetectorRef);
       }
 
       componentRef.onDestroy(() => {
-        if ((<any>this.appRef).unregisterChangeDetector) {
-          (<any>this.appRef).unregisterChangeDetector(componentRef.changeDetectorRef);
+        if ((this.appRef as any).unregisterChangeDetector) {
+          (this.appRef as any).unregisterChangeDetector(componentRef.changeDetectorRef);
         }
 
         if (rootElement.parentNode) {
@@ -40,7 +40,7 @@ export class ComponentLoader {
       });
     }
 
-    const rootContainer = (<any>this.appRef).components[0].location.nativeElement;
+    const rootContainer = (this.appRef as any).components[0].location.nativeElement;
     rootContainer.appendChild(rootElement);
   }
 }

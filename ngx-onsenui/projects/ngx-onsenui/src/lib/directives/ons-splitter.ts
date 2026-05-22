@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Type,
   ComponentRef,
@@ -84,10 +85,10 @@ export class OnsSplitterSide {
   }
 
   _createPageLoader() {
-    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
+    const componentRefMap: WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}: any, done: Function) => {
+      ({page, parent, params}: any, done: (...args: any[]) => void) => {
         this._zone.run(() => {
           const injector = Injector.create({
             providers: [
@@ -158,10 +159,10 @@ export class OnsSplitterContent {
   }
 
   _createPageLoader() {
-    const componentRefMap:WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
+    const componentRefMap: WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}: any, done: Function) => {
+      ({page, parent, params}: any, done: (...args: any[]) => void) => {
         const injector = Injector.create({
           providers: [
             {provide: Params, useValue: new Params(params || {})},

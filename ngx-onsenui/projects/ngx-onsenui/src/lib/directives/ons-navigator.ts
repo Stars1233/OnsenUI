@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -18,7 +19,7 @@ import {Params} from '../ons/params';
 export class NavigatorPage {
   constructor(
     public elementRef: ElementRef | null = null,
-    public destroy: Function = function() {},
+    public destroy: () => void = () => {},
     public animator: any = null,
     public params: Params = new Params()) {
   }
@@ -58,7 +59,7 @@ export class NavigatorPage {
   selector: 'ons-navigator'
 })
 export class OnsNavigator implements OnDestroy {
-  private _lastPageLoader: Function;
+  private _lastPageLoader: () => void;
 
   /**
    * @input page
@@ -92,7 +93,7 @@ export class OnsNavigator implements OnDestroy {
     const componentRefMap: WeakMap<HTMLElement, ComponentRef<any>> = new WeakMap<HTMLElement, ComponentRef<any>>();
 
     return new ons.PageLoader(
-      ({page, parent, params}: any, done: Function) => {
+      ({page, parent, params}: any, done: (...args: any[]) => void) => {
         this._zone.run(() => {
           const pageParams = new Params(params || {});
           const injector = Injector.create({
@@ -130,4 +131,3 @@ export class OnsNavigator implements OnDestroy {
     this.element.pageLoader = this._lastPageLoader;
   }
 }
-

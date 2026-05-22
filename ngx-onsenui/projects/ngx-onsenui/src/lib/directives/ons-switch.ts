@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -36,7 +37,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
-  private _boundOnChange: Function;
+  private _boundOnChange: () => void;
   private _propagateChange = (_: any) => { };
   private _propagateTouched = () => {};
 
@@ -56,6 +57,7 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]値が変更された時に発火します。[/ja]
    */
+  // tslint:disable-next-line:no-output-rename member-ordering
   @Output('valueChange') _valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private _elementRef: ElementRef) {
@@ -76,7 +78,7 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
   }
 
   ngOnChanges(changeRecord: SimpleChanges) {
-    const value = !!(<any>changeRecord).value.currentValue;
+    const value = !!(changeRecord as any).value.currentValue;
     this._element.checked = value;
   }
 
@@ -102,6 +104,6 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
   }
 
   registerOnTouched(fn: any) {
-    this. _propagateTouched = fn;
+    this._propagateTouched = fn;
   }
 }

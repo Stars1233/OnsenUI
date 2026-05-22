@@ -37,7 +37,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   `
 })
 export class SelectComponent {
-  selectedModifier: string = 'basic';
+  selectedModifier = 'basic';
   modifiers = [
     {value: 'basic', label: 'Basic'},
     {value: 'material', label: 'Material'},

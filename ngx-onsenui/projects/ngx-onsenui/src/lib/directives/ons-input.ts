@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -36,7 +37,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
-  private _boundOnChange: Function;
+  private _boundOnChange: () => void;
   private _propagateChange = (_: any) => { };
   private _propagateTouched = () => {};
 
@@ -46,6 +47,7 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
    *   [en]Input value for the internal `<input>` element.[/en]
    *   [ja]内部の`input`要素に対する入力値を設定します。[/ja]
    */
+  // tslint:disable-next-line:no-input-rename member-ordering
   @Input('value') _value: string;
 
   /**
@@ -54,6 +56,7 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]内部の`input`要素の値が変更された時に発火します。[/ja]
    */
+  // tslint:disable-next-line:no-output-rename member-ordering
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _elementRef: ElementRef) {
@@ -73,8 +76,8 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
     this._propagateTouched();
   }
 
-  ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
-    const value = changeRecord['_value'].currentValue;
+  ngOnChanges(changeRecord: { [key: string]: SimpleChange }) {
+    const value = changeRecord._value.currentValue;
     if (this._element.value !== value) {
       this._element.value = value;
     }
@@ -97,12 +100,12 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
   writeValue(obj: any) {
     this._element.value = obj;
   }
- 
+
   registerOnChange(fn: any) {
-     this._propagateChange = fn;
+    this._propagateChange = fn;
   }
- 
+
   registerOnTouched(fn: any) {
-    this. _propagateTouched = fn;
+    this._propagateTouched = fn;
   }
 }

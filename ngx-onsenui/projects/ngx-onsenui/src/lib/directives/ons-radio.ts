@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -16,8 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @directive OnsRadio
  * @selector ons-radio
  * @description
- *   [en]Angular directive for `<ons-radio>` component. You can use `[(ngModel)]` to synchronize the value of `[(ngModel)]` with the selected value.[/en]
- *   [ja]`<ons-radio>`要素のAngularディレクティブです。 `[(ngModel)]` を使用すると、 `[(ngModel)]` の値を選択された値と同期することができます。[/ja]
+ *   [en]Angular directive for `<ons-radio>` component.
+ *   Use `[(ngModel)]` to synchronize the value with the selected value.[/en]
+ *   [ja]`<ons-radio>`要素のAngularディレクティブです。
+ *   `[(ngModel)]` を使用すると、値を選択された値と同期することができます。[/ja]
  * @example
  *   <ons-radio value="Item A" [(ngModel)]="selectedValue"></ons-radio>
  *   <ons-radio value="Item B" [(ngModel)]="selectedValue"></ons-radio>
@@ -35,21 +38,23 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class OnsRadio implements OnDestroy, ControlValueAccessor {
   private _element: any;
-  private _boundOnChange: Function;
+  private _boundOnChange: () => void;
   private _propagateChange = (_: any) => { };
-  
+
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
     this._element.addEventListener('change', this._boundOnChange);
   }
-  
+
   _onChange(event: any) {
     const { value, checked } = event.target;
-    checked && this._propagateChange(value);
+    if (checked) {
+      this._propagateChange(value);
+    }
   }
-  
+
   get element(): any {
     return this._element;
   }
@@ -69,7 +74,7 @@ export class OnsRadio implements OnDestroy, ControlValueAccessor {
   }
 
   registerOnChange(fn: any) {
-      this._propagateChange = fn;
+    this._propagateChange = fn;
   }
 
   registerOnTouched() { }

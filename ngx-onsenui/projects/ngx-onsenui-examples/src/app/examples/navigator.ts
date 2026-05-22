@@ -1,3 +1,4 @@
+// tslint:disable:variable-name quotemark
 import {
   Component,
   ViewChild,
@@ -54,7 +55,7 @@ export class PageComponent {
   `
 })
 export class DefaultPageComponent {
-  msg = 'Click to push:'
+  msg = 'Click to push:';
 
   constructor(private _navigator: OnsNavigator) {
   }
@@ -75,7 +76,7 @@ export class DefaultPageComponent {
   `
 })
 export class NavigatorComponent {
-  page = DefaultPageComponent
+  page = DefaultPageComponent;
 }
 
 @NgModule({

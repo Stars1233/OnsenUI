@@ -29,7 +29,7 @@ import {
   </ons-page>
   `
 })
-export class IfComponent{
+export class IfComponent {
 }
 
 @NgModule({

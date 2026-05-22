@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import {
   Component,
   DialogFactory,
@@ -37,7 +38,7 @@ class MyDialogComponent {
   message = '';
 
   constructor(params: Params) {
-    this.message = <string>params.at('message');
+    this.message = params.at('message') as string;
   }
 }
 
@@ -59,7 +60,7 @@ class MyDialogComponent {
 })
 export class DialogComponent implements OnInit, OnDestroy {
   private _dialog: any;
-  private _destroyDialog: Function;
+  private _destroyDialog: () => void;
 
   constructor(private _dialogFactory: DialogFactory) {
   }

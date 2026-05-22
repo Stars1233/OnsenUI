@@ -1,4 +1,6 @@
+// tslint:disable:variable-name
 import {
+  AfterViewInit,
   Component,
   ComponentFactoryResolver,
   ViewChild,
@@ -104,6 +106,7 @@ export class ExampleListComponent {
   constructor(private _navigator: OnsNavigator) {}
 
   push(page) {
+    // tslint:disable-next-line:no-use-before-declare
     this._navigator.nativeElement.pushPage(ExampleViewComponent, { data: { page }});
   }
 }
@@ -117,7 +120,7 @@ export class ExampleListComponent {
     <ng-container #container></ng-container>
   `
 })
-export class ExampleViewComponent {
+export class ExampleViewComponent implements AfterViewInit {
 
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
 
@@ -137,5 +140,5 @@ export class ExampleViewComponent {
   `,
 })
 export class AppComponent {
-  page = ExampleListComponent
+  page = ExampleListComponent;
 }
