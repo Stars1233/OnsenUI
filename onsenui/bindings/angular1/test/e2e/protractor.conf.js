@@ -3,7 +3,7 @@ exports.config = {
   capabilities: {
     browserName: 'chrome',
     chromeOptions: {
-      binary: require('puppeteer').executablePath(),
+      binary: process.env.CHROME_BIN,
       args: ['--no-sandbox', '--disable-gpu', '--headless']
     }
   },

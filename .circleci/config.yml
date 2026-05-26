@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.5.3
 jobs:
   build:
     working_directory: ~/working_directory
@@ -6,7 +8,6 @@ jobs:
       - image: cimg/node:24.1.0-browsers
         environment:
           DISPLAY: :99
-          CHROME_BIN: /usr/bin/google-chrome-stable
           NODE_OPTIONS: --openssl-legacy-provider
     steps:
       - checkout
@@ -117,9 +118,20 @@ jobs:
             - ./vue-onsenui/node_modules
 
       # Tests
+      - browser-tools/install-chrome
+
       - run:
-          name: Install Puppeteer
-          command: npm install puppeteer
+          name: Set Chrome binary path
+          command: |
+            CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium-browser || command -v chromium || true)
+            if [ -z "$CHROME_BIN" ]; then
+              echo "Chrome binary was not found"
+              exit 1
+            fi
+            echo "export CHROME_BIN=${CHROME_BIN}" >> "$BASH_ENV"
+            echo "CHROME_BIN=${CHROME_BIN}"
+            "${CHROME_BIN}" --version
+
       - run:
           name: Run OnsenUI Tests
           command: |
@@ -128,7 +140,7 @@ jobs:
       - run:
           name: Run AngularJS tests
           command: |
-            CHROME_MAJOR=$(node -e "const {execSync}=require('child_process');console.log(execSync(require('puppeteer').executablePath()+' --version').toString().match(/\d+/)[0])")
+            CHROME_MAJOR=$($CHROME_BIN --version | grep -oE '[0-9]+' | head -1)
             cd onsenui/bindings/angular1
             npm install chromedriver@${CHROME_MAJOR} --no-save
             npm test
