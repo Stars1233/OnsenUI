@@ -23,7 +23,7 @@
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26",
-    "onsenui": "~2.11.2"
+    "onsenui": "~2.12.8"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
