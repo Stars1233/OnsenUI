@@ -19,7 +19,7 @@ import {
   `
 })
 export class HomeComponent {
-  i: number = 0;
+  i = 0;
 
   constructor() {
   }

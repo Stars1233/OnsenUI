@@ -5,7 +5,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from 'ngx-onsenui';
 
-declare var alert: Function;
+declare var alert: (...args: any[]) => void;
 
 @Component({
   selector: 'app-button',

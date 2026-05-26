@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import {
   Injector,
   ElementRef,
@@ -14,7 +15,7 @@ import {ComponentLoader} from './component-loader';
 
 export interface PopoverRef {
   popover: any;
-  destroy: Function;
+  destroy: () => void;
 }
 
 /**
@@ -32,7 +33,7 @@ export class PopoverFactory {
   ) {
   }
 
-  createPopover(componentType: any, params: Object = {}): Promise<PopoverRef> { // TODO: fix "any"
+  createPopover(componentType: any, params: object = {}): Promise<PopoverRef> { // TODO: fix "any"
     console.warn('[ngx-onsenui] PopoverFactory is deprecated since 4.0.0-rc.0. Place <ons-popover> into your component instead.');
 
     return new Promise(resolve => {

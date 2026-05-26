@@ -39,7 +39,7 @@ export class NotificationComponent {
       message: 'This dialog can be canceled by tapping the background or using the back button on your device.',
       cancelable: true,
       callback: (i: number) => {
-        if (i == -1) {
+        if (i === -1) {
           onsNotification.alert({message: 'You canceled it!'});
         }
       }

@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import {
   Component,
   ElementRef,
@@ -29,14 +30,14 @@ import {
     `
 })
 export class GestureDetectorComponent {
-  status: string = 'Touch me!';
+  status = 'Touch me!';
 
   constructor(elementRef: ElementRef) {
     const events = 'drag dragleft dragright dragup dragdown hold release swipe swipeleft ' +
       'swiperight swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate';
 
-    events.split(/\s+/).forEach(event => {
-      elementRef.nativeElement.addEventListener(event, (event: any) => this.handleGesture(event));
+    events.split(/\s+/).forEach(eventName => {
+      elementRef.nativeElement.addEventListener(eventName, (e: any) => this.handleGesture(e));
     });
   }
 
@@ -55,4 +56,3 @@ export class GestureDetectorComponent {
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GestureDetectorModule { }
-

@@ -45,7 +45,7 @@ import * as ons from 'onsenui';
   `
 })
 export class ToastComponent {
-  animation: string = 'default';
+  animation = 'default';
 
   constructor() {
   }

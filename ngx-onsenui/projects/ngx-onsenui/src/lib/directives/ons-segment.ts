@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Directive,
@@ -65,8 +66,6 @@ export class OnsSegment implements OnChanges {
 
   /**
    * @output postchange
-   * @param $event
-   * @param $event.index
    * @desc
    *   [en]Triggers when the index of the active button is changed.[/en]
    *   [ja]`ons-segment`要素のアクティブなボタンのインデックスが変わった時に呼び出されます。[/ja]

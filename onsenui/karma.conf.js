@@ -1,6 +1,12 @@
 // Karma configuration
 // Generated on Thu Apr 09 2015 15:16:41 GMT+0900 (JST)
 
+if (!process.env.CHROME_BIN) {
+  process.env.CHROME_BIN = '/usr/bin/google-chrome';
+}
+
+console.log('Using Chrome:', process.env.CHROME_BIN);
+
 module.exports = function(config) {
   config.set({
 

@@ -1,3 +1,4 @@
+// tslint:disable:variable-name no-use-before-declare
 import {
   Component,
   ViewChild,

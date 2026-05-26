@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import {
   Component,
   PopoverFactory,
@@ -27,7 +28,7 @@ class MyPopoverComponent implements OnInit {
   message = '';
 
   constructor(params: Params) {
-    this.message = <string>params.at('msg');
+    this.message = params.at('msg') as string;
   }
 
   ngOnInit() {
@@ -57,7 +58,7 @@ class MyPopoverComponent implements OnInit {
 })
 export class PopoverComponent implements OnInit, OnDestroy {
   private _popover: any;
-  private _destroyPopover: Function;
+  private _destroyPopover: () => void;
 
   constructor(private _popoverFactory: PopoverFactory) { }
 

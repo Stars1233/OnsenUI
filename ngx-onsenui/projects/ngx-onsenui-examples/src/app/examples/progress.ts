@@ -34,7 +34,7 @@ import {
   </ons-page>
   `
 })
-export class ProgressComponent{
+export class ProgressComponent {
 }
 
 @NgModule({

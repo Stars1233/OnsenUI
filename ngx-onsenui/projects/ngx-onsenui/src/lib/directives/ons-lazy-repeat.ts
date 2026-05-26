@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Directive,
   ElementRef,
@@ -57,10 +58,10 @@ export class OnsLazyRepeat implements OnDestroy {
   @Input() set onsLazyRepeatOf(value: any) {
     this._onsLazyRepeatOf = value;
 
-    this._provider = new (<any>ons)._internal.LazyRepeatProvider(
+    this._provider = new (ons as any)._internal.LazyRepeatProvider(
       this._elementRef.nativeElement.parentElement,
-      new (<any>ons)._internal.LazyRepeatDelegate({
-        loadItemElement: (index: number, done: Function) => {
+      new (ons as any)._internal.LazyRepeatDelegate({
+        loadItemElement: (index: number, done: (item: any) => void) => {
           this._loadItemTemplate(index, done);
         },
         countItems: () => {
@@ -70,7 +71,7 @@ export class OnsLazyRepeat implements OnDestroy {
     );
   }
 
-  _loadItemTemplate(index: number, done: Function) {
+  _loadItemTemplate(index: number, done: (item: any) => void) {
     const context = new ItemContext(this._onsLazyRepeatOf[index], index, this._onsLazyRepeatOf.length);
     const view = this._viewContainer.createEmbeddedView(this._templateRef, context);
     // dirty fix on createEmbeddedView() does not insert DOM element randomly.

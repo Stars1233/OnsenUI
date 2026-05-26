@@ -32,7 +32,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   `
 })
 export class RangeComponent {
-  value: string = '10';
+  value = '10';
   rangeForm: FormControl;
   reactiveStartValue: 89;
 

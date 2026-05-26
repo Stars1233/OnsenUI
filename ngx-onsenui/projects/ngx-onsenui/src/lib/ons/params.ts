@@ -1,4 +1,4 @@
-
+// tslint:disable:variable-name
 export class Params {
   constructor(private _data: any = {}) {}
 

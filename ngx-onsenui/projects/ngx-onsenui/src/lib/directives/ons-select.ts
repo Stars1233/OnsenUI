@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -38,7 +39,7 @@ import * as ons from 'onsenui';
 })
 export class OnsSelect implements OnDestroy, ControlValueAccessor {
   private _element: any;
-  private _boundOnChange: Function;
+  private _boundOnChange: () => void;
   private _propagateChange = (_: any) => { };
 
   constructor(private _elementRef: ElementRef) {

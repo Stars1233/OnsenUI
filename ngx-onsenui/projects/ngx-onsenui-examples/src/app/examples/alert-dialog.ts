@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import {
   Component,
   ComponentRef,
@@ -31,7 +32,7 @@ class MyAlertDialogComponent {
   message = '';
 
   constructor(params: Params) {
-    this.message = <string>params.at('message');
+    this.message = params.at('message') as string;
   }
 }
 
@@ -52,7 +53,7 @@ class MyAlertDialogComponent {
 })
 export class AlertDialogComponent implements AfterViewInit, OnDestroy {
   private _alert: any;
-  private _destroyAlert: Function;
+  private _destroyAlert: () => void;
 
   constructor(private _adf: AlertDialogFactory) {
   }

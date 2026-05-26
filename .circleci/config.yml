@@ -1,17 +1,19 @@
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.5.3
 jobs:
   build:
     working_directory: ~/working_directory
     docker:
-      - image: circleci/node:14.18.2-browsers
-        env:
-          - DISPLAY=:99
-          - CHROME_BIN=/usr/bin/google-chrome
+      - image: cimg/node:24.1.0-browsers
+        environment:
+          DISPLAY: :99
+          NODE_OPTIONS: --openssl-legacy-provider
     steps:
       - checkout
-      - run:
-          name: Install npm
-          command: sudo npm install -g npm@latest
+      # - run:
+      #     name: Install npm
+      #     command: sudo npm install -g npm@latest
       - run:
           name: Print system information
           command: |
@@ -20,11 +22,14 @@ jobs:
             echo "$(google-chrome --version)"
       - run:
           name: Install coveralls and gulp globally
-          command: sudo npm install -g  add coveralls gulp
+          command: |
+            sudo apt-get update
+            sudo npm install -g coveralls gulp
       - run:
           name: Install rsync
-          command: sudo apt install -y rsync
-
+          command: |
+            sudo apt-get update
+            sudo apt install -y rsync
       # Core dependencies
       - restore_cache:
           keys:
@@ -113,13 +118,32 @@ jobs:
             - ./vue-onsenui/node_modules
 
       # Tests
-      - run:
-          name: Run OnsenUI Tests
-          command: npm run --prefix onsenui test
+      - browser-tools/install-chrome
 
       - run:
+          name: Set Chrome binary path
+          command: |
+            CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium-browser || command -v chromium || true)
+            if [ -z "$CHROME_BIN" ]; then
+              echo "Chrome binary was not found"
+              exit 1
+            fi
+            echo "export CHROME_BIN=${CHROME_BIN}" >> "$BASH_ENV"
+            echo "CHROME_BIN=${CHROME_BIN}"
+            "${CHROME_BIN}" --version
+
+      - run:
+          name: Run OnsenUI Tests
+          command: |
+            cd onsenui
+            node scripts/unit-test.js --browsers=local_chrome_headless
+      - run:
           name: Run AngularJS tests
-          command: cd onsenui/bindings/angular1; npm test
+          command: |
+            CHROME_MAJOR=$($CHROME_BIN --version | grep -oE '[0-9]+' | head -1)
+            cd onsenui/bindings/angular1
+            npm install chromedriver@${CHROME_MAJOR} --no-save
+            npm test
 
       #- run: cd bindings/angular2; npm test
       #- run: cd bindings/vue; npm test
@@ -130,8 +154,8 @@ jobs:
           name: Save test results
           command: |
             mkdir -p ~/junit
-            find . -type f -regex "./onsenui/.*xml" -exec cp {} ~/junit/ \;
-            cat ./core/test/unit/coverage/*/lcov.info | coveralls || true # Ignore if this fails.
+            find . -type f -name "TEST-*.xml" -exec cp {} ~/junit/ \;
+            cat ./core/test/unit/coverage/*/lcov.info | coveralls || true
       - store_test_results:
           path: ~/junit
       - store_artifacts:

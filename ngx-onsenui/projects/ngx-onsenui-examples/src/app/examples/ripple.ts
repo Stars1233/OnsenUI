@@ -28,7 +28,7 @@ import {
   </ons-page>
   `
 })
-export class RippleComponent{
+export class RippleComponent {
 }
 
 @NgModule({

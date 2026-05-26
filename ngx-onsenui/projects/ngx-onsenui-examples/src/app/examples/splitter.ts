@@ -9,7 +9,7 @@ import {
   selector: 'ons-page',
   template: `
     <ons-toolbar>
-      <div class="center">Content Page</div> 
+      <div class="center">Content Page</div>
     </ons-toolbar>
     <div class="content">
       contents
@@ -23,7 +23,7 @@ export class ContentPageComponent {
   selector: 'ons-page',
   template: `
     <ons-toolbar>
-      <div class="center">Left Page</div> 
+      <div class="center">Left Page</div>
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">

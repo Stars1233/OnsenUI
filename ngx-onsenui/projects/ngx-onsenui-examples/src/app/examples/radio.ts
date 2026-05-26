@@ -51,9 +51,9 @@ import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angul
   </ons-page>
   `
 })
-export class RadioComponent{
+export class RadioComponent {
   fruits: string[] = ['Apples', 'Bananas', 'Oranges'];
-  selectedFruit: string = 'Bananas';
+  selectedFruit = 'Bananas';
   vegetables: string[] = ['Potato', 'Turnip', 'Broccoli'];
   exampleForm: FormGroup;
 

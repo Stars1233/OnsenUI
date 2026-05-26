@@ -22,7 +22,7 @@ import {
   </ons-page>
   `
 })
-export class BottomToolbarComponent{
+export class BottomToolbarComponent {
 }
 
 @NgModule({

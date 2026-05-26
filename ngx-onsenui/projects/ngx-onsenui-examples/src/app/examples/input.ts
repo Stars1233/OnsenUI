@@ -48,9 +48,9 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormsModule} from '@angula
   </ons-page>
   `
 })
-export class InputComponent{
+export class InputComponent {
   exampleForm: FormGroup;
-  target: string = '';
+  target = '';
 
   constructor() {
     this.exampleForm = new FormGroup({

@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -36,7 +37,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
-  private _boundOnChange: Function;
+  private _boundOnChange: () => void;
   private _propagateChange = (_: any) => { };
   private _propagateTouched = () => {};
 
@@ -46,6 +47,7 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
    *   [en]Input value of the `<ons-range>` element..[/en]
    *   [ja]`ons-range`要素に対する入力値を指定します。[/ja]
    */
+  // tslint:disable-next-line:no-input-rename member-ordering
   @Input('value') _value: string;
 
   /**
@@ -54,6 +56,7 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]値が変更された時に発火します。[/ja]
    */
+  // tslint:disable-next-line:no-output-rename member-ordering
   @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _elementRef: ElementRef) {
@@ -73,8 +76,8 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
     this._propagateTouched();
   }
 
-  ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
-    const value = changeRecord['_value'].currentValue;
+  ngOnChanges(changeRecord: { [key: string]: SimpleChange }) {
+    const value = changeRecord._value.currentValue;
     this._element.value = value;
   }
 
@@ -97,10 +100,10 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
   }
 
   registerOnChange(fn: any) {
-     this._propagateChange = fn;
+    this._propagateChange = fn;
   }
 
   registerOnTouched(fn: any) {
-    this. _propagateTouched = fn;
+    this._propagateTouched = fn;
   }
 }

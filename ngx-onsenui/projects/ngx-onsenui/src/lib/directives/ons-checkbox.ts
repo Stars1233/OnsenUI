@@ -1,3 +1,4 @@
+// tslint:disable:directive-selector directive-class-suffix variable-name
 import {
   Component,
   Injector,
@@ -16,8 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @directive OnsCheckbox
  * @selector ons-checkbox
  * @description
- *   [en]Angular directive for `<ons-checkbox>` component. You can use `[(ngModel)]` to synchronize the value of `[(ngModel)]` with the array of the selected values.[/en]
- *   [ja]`<ons-checkbox>`要素のAngularディレクティブです。 `[(ngModel)]` を使用すると、 `[(ngModel)]` の値を選択された値の配列と同期することができます。[/ja]
+ *   [en]Angular directive for `<ons-checkbox>` component.
+ *   Use `[(ngModel)]` to synchronize the value with the array of the selected values.[/en]
+ *   [ja]`<ons-checkbox>`要素のAngularディレクティブです。
+ *   `[(ngModel)]` を使用すると、値を選択された値の配列と同期することができます。[/ja]
  * @example
  *   <ons-checkbox value="Item A" [(ngModel)]="selectedValues"></ons-checkbox>
  *   <ons-checkbox value="Item B" [(ngModel)]="selectedValues"></ons-checkbox>
@@ -35,17 +38,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class OnsCheckbox implements OnDestroy, ControlValueAccessor {
   private _element: any;
-  private _boundOnChange: Function;
+  private _boundOnChange: () => void;
   private _state: any[] | boolean;
   private _propagateChange = (_: any) => { };
-  
+
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
     this._element.addEventListener('change', this._boundOnChange);
   }
-  
+
   _onChange(event: any) {
     const { value, checked } = event.target;
     let newValue;
@@ -77,7 +80,7 @@ export class OnsCheckbox implements OnDestroy, ControlValueAccessor {
       this._propagateChange(this._state);
     }
   }
-  
+
   get element(): any {
     return this._element;
   }
@@ -102,7 +105,7 @@ export class OnsCheckbox implements OnDestroy, ControlValueAccessor {
   }
 
   registerOnChange(fn: any) {
-      this._propagateChange = fn;
+    this._propagateChange = fn;
   }
 
   registerOnTouched() { }

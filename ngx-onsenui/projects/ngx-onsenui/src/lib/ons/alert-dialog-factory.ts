@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import {
   Injector,
   ComponentFactoryResolver,
@@ -12,7 +13,7 @@ import {ComponentLoader} from './component-loader';
 
 export interface AlertDialogRef {
   alertDialog: any;
-  destroy: Function;
+  destroy: () => void;
 }
 
 /**
@@ -30,7 +31,7 @@ export class AlertDialogFactory {
   ) {
   }
 
-  createAlertDialog(componentType: Type<any>, params: Object = {}): Promise<AlertDialogRef> {
+  createAlertDialog(componentType: Type<any>, params: object = {}): Promise<AlertDialogRef> {
     console.warn('[ngx-onsenui] AlertDialogFactory is deprecated since 4.0.0-rc.0. Place <ons-alert-dialog> into your component instead.');
 
     return new Promise(resolve => {

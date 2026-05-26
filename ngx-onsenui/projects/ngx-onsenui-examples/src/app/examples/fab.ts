@@ -46,7 +46,7 @@ import {
   </ons-page>
   `
 })
-export class FabComponent{
+export class FabComponent {
 
   onClick() {
     alert('Clicked!');
